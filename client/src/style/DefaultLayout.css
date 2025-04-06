@@ -1,0 +1,40 @@
+/* Logo di header kiri */
+.demo-logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.3);
+    margin-right: 16px;
+    border-radius: 6px;
+  }
+  
+  /* Ubah background breadcrumb jika perlu */
+  .ant-breadcrumb {
+    font-weight: 500;
+  }
+  
+  /* Konten custom padding kalau mau beda */
+  .ant-layout-content {
+    transition: all 0.3s ease;
+  }
+  
+  /* Sidebar custom hover atau warna item */
+  .ant-menu-item:hover {
+    background-color: #e6f7ff !important;
+  }
+  
+  /* Sidebar menu selected */
+  .ant-menu-item-selected {
+    background-color: #bae7ff !important;
+  }
+  
+  /* Responsive spacing */
+  @media (max-width: 768px) {
+    .ant-layout {
+      flex-direction: column;
+    }
+  
+    .ant-layout-sider {
+      width: 100% !important;
+    }
+  }
+  
