@@ -17,5 +17,5 @@
 - `cd /client` ABIS ITU LO INSTALL DEPENDENCIES NYA WAK `npm install` *MINIMAL NODE LO VERSI 20 WAK*
 
 ### TUTORIAL DI TIMESTAMP 1:52:00
-- INSTALL DEPENDENCIES PAKE COMMAND `npm install`
+- INSTALL DEPENDENCIES PAKE COMMAND `npm install`, `npm i concurrently`, `npm i redux-devtools-extension --legacy-peer-deps`
 - RUNNING PROJECT PAKE COMMAND `npm run dev`
