@@ -1,13 +1,12 @@
 import React from 'react'
 import DefaultLayout from '../components/DefaultLayout';
 
-
-const Itempage = () => {
+export const Itempage = () => {
   return (
-    <div>
+    <DefaultLayout>
         <h1>Item List</h1>
-    </div>
-  )
-}
+    </DefaultLayout>
+  );
+};
 
-export default Itempage
+export default Itempage;

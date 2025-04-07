@@ -1,75 +1,77 @@
-import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import '../style/DefaultLayout.css';
-
+import React, { useState } from "react";
+import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Link } from "react-router-dom";
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  UserOutlined,
+  LogoutOutlined,
+  HomeOutlined,
+  CopyOutlined,
+  UnorderedListOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
+import "../style/DefaultLayout.css";
 const { Header, Content, Sider } = Layout;
 
-const items1 = ['1', '2', '3'].map(key => ({
-  key,
-  label: `nav ${key}`,
-}));
-
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-  const key = String(index + 1);
-  return {
-    key: `sub${key}`,
-    icon: React.createElement(icon),
-    label: `subnav ${key}`,
-    children: Array.from({ length: 4 }).map((_, j) => {
-      const subKey = index * 4 + j + 1;
-      return {
-        key: subKey,
-        label: `option${subKey}`,
-      };
-    }),
-  };
-});
-
 const DefaultLayout = ({ children }) => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const { collapsed, setCollapsed } = useState(false);
+
+  const toggle = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
     <Layout>
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
-        <div className="demo-logo" />
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="logo">
+          <h1 className="text-center text-light font-wight-bold mt-4">POS</h1>
+        </div>
         <Menu
           theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={items1}
-          style={{ flex: 1, minWidth: 0 }}
-        />
-      </Header>
-      <Layout>
-        <Sider width={200} style={{ background: colorBgContainer }}>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-            items={items2}
-          />
-        </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb
-            items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
-            style={{ margin: '16px 0' }}
-          />
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            {children} {/* Ini yang menampilkan isi Homepage */}
-          </Content>
-        </Layout>
+          mode="inline"
+          defaultSelectedKeys={window.location.pathname}
+        >
+          <Menu.Item key="/" icon={<HomeOutlined />}>
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item key="/bills" icon={<CopyOutlined />}>
+            <Link to="/bills">Bills</Link>
+          </Menu.Item>
+          <Menu.Item key="/items" icon={<UnorderedListOutlined />}>
+            <Link to="/items">Items</Link>
+          </Menu.Item>
+          <Menu.Item key="/customers" icon={<UserOutlined />}>
+            <Link to="/customers">Cutomers</Link>
+          </Menu.Item>
+          <Menu.Item key="/logout" icon={<LogoutOutlined />}>
+            Logout
+          </Menu.Item>
+        </Menu>
+      </Sider>
+      <Layout className="site-layout">
+        <Header className="site-layout-background" style={{ padding: 0 }}>
+          {React.createElement(
+            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+            {
+              className: "trigger",
+              onClick: toggle,
+            }
+          )}
+        </Header>
+        <Content
+          className="site-layout-background"
+          style={{
+            margin: "24px 16px",
+            padding: 24,
+            minHeight: 280,
+          }}
+        >
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );
